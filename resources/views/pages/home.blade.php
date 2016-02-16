@@ -103,7 +103,7 @@
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-addon" for="coverccfee">$</div>
-										<input type="text" class="form-control" name="otheramount" id="otheramount" placeholder="" />
+										<input type="text" class="form-control numeric" name="otheramount" id="otheramount" placeholder="" />
 									</div>
 								</div>
 							</div>
@@ -214,23 +214,23 @@
 					<div class="form-group">
 						<label for="donor_cardnum" class="col-sm-4 control-label">Card Number</label>
 						<div class="col-sm-8">
-							<input type="text" data-stripe="number" name="card_number" required="" class="form-control" id="donor_cardnum" placeholder="Card Number">
+							<input type="text" data-stripe="number" name="card_number" required="" class="form-control numeric" id="donor_cardnum" placeholder="Card Number">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="donor_cvc" class="col-sm-4 control-label">CVC</label>
 						<div class="col-sm-2">
-							<input type="text" class="form-control" id="donor_cvc" size="4" data-stripe="cvc" name="cvv">
+							<input type="text" class="form-control numeric" id="donor_cvc" size="4" data-stripe="cvc" name="cvv">
 						</div>
 					</div>
 
 					<div class="form-group form-inline">
 						<label for="donor_cvc" class="col-sm-4 control-label">Expiration (MM/YYYY)</label>
 						<div class="col-sm-8">
-							<input type="text" size="2" class="form-control" data-stripe="exp-month" name="exp_month" maxlength="2" />
+							<input type="text" size="2" class="form-control numeric" data-stripe="exp-month" name="exp_month" maxlength="2" />
 							/
-							<input type="text" size="4" class="form-control" data-stripe="exp-year" name="exp_year" maxlength="4" />
+							<input type="text" size="4" class="form-control numeric" data-stripe="exp-year" name="exp_year" maxlength="4" />
 						</div>
 					</div>
 
