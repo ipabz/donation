@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+
+use App\Frequency;
+use App\Donation;
 
 class DonationController extends Controller
 {
@@ -29,6 +33,27 @@ class DonationController extends Controller
 	{
 	   $vars = [];
        return view('pages.home', $vars);
+	}
+
+
+	/**
+	 * Handle Recurring Donations
+	 * 
+	 * @return void
+	 */
+	public function recurringDonations()
+	{
+		$recurring = Frequency::where('status', 1)
+							  ->where('repeat_date', Carbon::now()->format('Y-m-d'))
+							  ->join('donations', 'donations.frequency_id', '=', 'frequencies.id')
+							  ->groupBy('frequencies.id')
+							  ->get();
+
+		foreach($recurring as $r) {
+			// donation entry here.
+			// update repeat_date field of frequencies table
+		}
+
 	}
 
 
