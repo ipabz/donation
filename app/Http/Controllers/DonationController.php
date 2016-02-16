@@ -15,7 +15,7 @@ use App\CreditCard;
 
 use Carbon\Carbon;
 
-use DB;
+use DB, Session;
 
 class DonationController extends Controller
 {
@@ -37,7 +37,7 @@ class DonationController extends Controller
 	 */
 	public function index()
 	{
-	   $vars = [];
+	   $vars = ['message' => Session::get('message')];
        return view('pages.home', $vars);
 	}
 
@@ -173,6 +173,22 @@ class DonationController extends Controller
         	'frequency_id' => $frequency_id,
         	'cover_processing_fee' => $this->request->has('donationaddinfo_covercc')?'yes':'no'
         ]);
+
+
+        $desc = "Donation From " . $this->request->input('name');
+        $coverFee = $this->request->has('donationaddinfo_covercc') ? true:false;
+
+		$metaData = [
+			'Organization' => 'Midamerica Prison MInistry',
+			'Donor Name' => $this->request->input('name'),
+			'Address' => $this->request->input('address') . ', ' . $this->request->input('city') . ', ' . $this->request->input('state') . ' ' . $this->request->input('zipcode') . ', ' . $this->request->input('country')
+		];
+
+		$c = charge($this->request->input('card_number'), $this->request->input('exp_month'), $this->request->input('exp_year'), $amount, $desc, $coverFee, $metaData);
+
+		if ($c !== TRUE) {			
+			return redirect( route('home') )->withMessage($c);
+		}
 
         return redirect()->route('donation.thankyou');
 

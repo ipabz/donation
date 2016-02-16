@@ -11,17 +11,9 @@
 |
 */
 
-Route::get('/', 'DonationController@index');
+
 
 Route::get('/charge', 'DonationController@chargeTest');
-
-Route::group(['prefix' => 'donation'], function() {
-    Route::post('/submit', ['as' => 'donation.submit', 'uses' => 'DonationController@postSubmitDonation']);
-
-    Route::get('/thankyou', ['as' => 'donation.thankyou', 'uses' => 'DonationController@thankyou']);
-});
-
-
 Route::get('/recur', 'DonationController@recurringDonations');
 
 /*
@@ -36,5 +28,13 @@ Route::get('/recur', 'DonationController@recurringDonations');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+
+	Route::get('/', ['as' => 'home', 'uses' => 'DonationController@index']);
+
+	Route::group(['prefix' => 'donation'], function() {
+	    Route::post('/submit', ['as' => 'donation.submit', 'uses' => 'DonationController@postSubmitDonation']);
+
+	    Route::get('/thankyou', ['as' => 'donation.thankyou', 'uses' => 'DonationController@thankyou']);
+	});
+    
 });

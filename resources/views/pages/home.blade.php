@@ -13,10 +13,15 @@
 
 <form action="{{ route('donation.submit') }}" method="POST" id="payment-form">
 <input type="hidden" name="organization_id" value="1" />
+{!! csrf_field() !!}
 <section id="donatenow">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
+
+				@if($message)
+				<div class="alert alert-danger" role="alert">{{ $message }}</div>
+				@endif
 
 				<div class="row donationheader">
 					<h1>Donate to Midamerica Prison Ministry</h1>
