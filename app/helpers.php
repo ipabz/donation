@@ -10,7 +10,7 @@ function charge($cardNumber, $expMonth, $expYear, $amount, $description, $coverP
 	$amount = $amount * 100;
 
 	if ( $coverProcessingFee ) {
-		$amount = $amount + (($amount * 0.029) + 0.3);
+		$amount = $amount + (($amount * 0.03) + 0.3);
 	}
 
 	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));

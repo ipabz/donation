@@ -260,6 +260,7 @@ $(function() {
 		else {
 			$('#donationamount_otherinput').addClass('hidden');
 		}
+		calculate();
 	});
 
 	$('.donationopt label').on('click', function(e) {
@@ -286,7 +287,28 @@ $(function() {
 		else {
 			$('#covercctext').addClass('hidden');
 		}
+
+		calculate();
 	});
+
+	$('#donationamount_otheramount').keyup(function() {
+		calculate();
+	});
+
+	function calculate()
+	{
+		var val = $('input:radio[name=donationamount]:checked').val();
+
+		if (val === '') {			
+			val = $('#donationamount_otheramount').val();
+		} 
+
+		var feeAmount = (Number(val) * 0.03) + 0.3;
+		var totalAmount = Number(val) + feeAmount;
+
+		$('#coverccfee').val(feeAmount.toFixed(2));
+		$('#covercctotal').val(totalAmount.toFixed(2));
+	}
  
 
 });
