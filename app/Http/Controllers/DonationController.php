@@ -10,6 +10,7 @@ use Carbon\Carbon;
 
 use App\Frequency;
 use App\Donation;
+use DB;
 
 class DonationController extends Controller
 {
@@ -43,15 +44,33 @@ class DonationController extends Controller
 	 */
 	public function recurringDonations()
 	{
-		$recurring = Frequency::where('status', 1)
+		$recurring = Frequency::select(DB::raw("donations.*, frequencies.repeat_date, frequencies.status"))
+							  ->where('status', 1)
 							  ->where('repeat_date', Carbon::now()->format('Y-m-d'))
 							  ->join('donations', 'donations.frequency_id', '=', 'frequencies.id')
 							  ->groupBy('frequencies.id')
 							  ->get();
 
 		foreach($recurring as $r) {
-			// donation entry here.
-			// update repeat_date field of frequencies table
+
+			$donationData = [
+				'donor_id' => $r->donor_id,
+				'credit_card_id' => $r->credit_card_id,
+				'organization_id' => $r->organization_id,
+				'amount' => $r->amount,
+				'note' => $r->note,
+				'recur' => 1,
+				'frequency_id' => $r->frequency_id,
+				'cover_processing_fee' => $r->cover_processing_fee
+			];
+
+			Donation::create( $donationData );
+
+			$date = new Carbon();
+			$r->repeat_date = $date->addMonths(1);
+			$r->save();
+
+			// add charge here
 		}
 
 	}
