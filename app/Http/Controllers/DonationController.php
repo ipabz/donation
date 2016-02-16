@@ -59,6 +59,9 @@ class DonationController extends Controller
 		foreach($recurring as $r) {
 
 			$donor = Donor::find($r->donor_id);
+			$creditCard = CreditCard::find($r->credit_card_id);
+			$ccMonth = date("m", strtotime($creditCard->exp_date));
+			$ccYear = date("Y", strtotime($creditCard->exp_date));
 
 			$desc = "Donation From " . $donor->name;
 	        $coverFee = $r->cover_processing_fee === 'yes' ? true:false;
@@ -69,10 +72,11 @@ class DonationController extends Controller
 				'Address' => $donor->address . ', ' . $donor->city . ', ' . $donor->state . ' ' . $donor->zipcode . ', ' . $donor->country
 			];
 
-			$c = charge($this->request->input('card_number'), $this->request->input('exp_month'), $this->request->input('exp_year'), $amount, $desc, $coverFee, $metaData);
+			$c = charge($creditCard->card_number, $ccMonth, $ccYear, $amount, $desc, $coverFee, $metaData);
 
 			if ($c !== TRUE) {
-
+				// card contains error
+				// will do something here
 			} else {
 
 				$donationData = [
