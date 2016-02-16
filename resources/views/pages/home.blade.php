@@ -291,16 +291,16 @@ $(function() {
 		calculate();
 	});
 
-	$('#donationamount_otheramount').keyup(function() {
+	$('#otheramount').keyup(function() {
 		calculate();
 	});
 
 	function calculate()
 	{
-		var val = $('input:radio[name=donationamount]:checked').val();
+		var val = $('input:radio[name=amount]:checked').val();
 
-		if (val === '') {			
-			val = $('#donationamount_otheramount').val();
+		if (val === 'other') {			
+			val = $('#otheramount').val();
 		} 
 
 		var feeAmount = (Number(val) * 0.03) + 0.3;
