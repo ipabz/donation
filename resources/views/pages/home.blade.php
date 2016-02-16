@@ -151,6 +151,7 @@
 	</div>
 </section>
 
+ 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -160,31 +161,72 @@
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-</main>
+        <form action="" method="POST" id="payment-form">
+		  <span class="payment-errors"></span>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
+		  <div class="form-row">
+		    <label>
+		      <span>Email</span>
+		      <input type="text" size="20" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Name</span>
+		      <input type="text" size="20" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Address</span>
+		      <input type="text" size="20" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Post Code</span>
+		      <input type="text" size="20" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>City</span>
+		      <input type="text" size="20" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Card Number</span>
+		      <input type="text" size="20" data-stripe="number"/>
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>CVC</span>
+		      <input type="text" size="4" data-stripe="cvc"/>
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Expiration (MM/YYYY)</span>
+		      <input type="text" size="2" data-stripe="exp-month"/>
+		    </label>
+		    <span> / </span>
+		    <input type="text" size="4" data-stripe="exp-year"/>
+		  </div>
+
+		</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Send</button>
       </div>
     </div>
   </div>
