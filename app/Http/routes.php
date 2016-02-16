@@ -19,6 +19,9 @@ Route::group(['prefix' => 'donation'], function() {
     Route::post('/submit', ['as' => 'donation.submit', 'uses' => 'DonationController@postSubmitDonation']);
 });
 
+Route::get('/thankyou', 'DonationController@thankyou');
+Route::get('/recur', 'DonationController@recurringDonations');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
