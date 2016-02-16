@@ -32,3 +32,20 @@ function charge($cardNumber, $expMonth, $expYear, $amount, $description, $coverP
 	return $charge->paid;
 
 }
+
+function getDonorByEmail($email) {
+
+    $donor = \App\Donor::where('email', '=', $email)->first();
+    if ($donor) {
+        return $donor;
+    }
+    return '';
+}
+function getCcByCardNumber($cardNumber) {
+
+    $cc = \App\CreditCard::where('card_number', '=', $cardNumber)->first();
+    if ($cc) {
+        return $cc;
+    }
+    return '';
+}
