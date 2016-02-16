@@ -11,7 +11,7 @@
 
 <main role="main">
 
-<form action="{{ route('donation.submit') }}" method="POST" id="payment-form">
+<form action="{{ route('donation.submit') }}" method="POST" id="payment-form" onSubmit="return validate_cc_exp();">
 <input type="hidden" name="organization_id" value="1" />
 {!! csrf_field() !!}
 <section id="donatenow">
@@ -159,8 +159,6 @@
 
 
 <!-- Modal -->
-
-<<<<<<< HEAD
 <div class="modal fade" id="donor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -214,23 +212,23 @@
 					<div class="form-group">
 						<label for="donor_cardnum" class="col-sm-4 control-label">Card Number</label>
 						<div class="col-sm-8">
-							<input type="text" data-stripe="number" name="card_number" required="" class="form-control" id="donor_cardnum" placeholder="Card Number">
+							<input type="text" data-stripe="number" name="card_number" required="" class="form-control numeric" id="donor_cardnum" placeholder="Card Number">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="donor_cvc" class="col-sm-4 control-label">CVC</label>
 						<div class="col-sm-2">
-							<input type="text" class="form-control" id="donor_cvc" size="4" data-stripe="cvc" name="cvv">
+							<input type="text" class="form-control numeric" id="donor_cvc" size="4" data-stripe="cvc" name="cvv" maxlength="4">
 						</div>
 					</div>
 
 					<div class="form-group form-inline">
 						<label for="donor_cvc" class="col-sm-4 control-label">Expiration (MM/YYYY)</label>
 						<div class="col-sm-8">
-							<input type="text" size="2" class="form-control" data-stripe="exp-month" name="exp_month" maxlength="2" />
+							<input type="text" size="2" class="form-control numeric" data-stripe="exp-month" name="exp_month" id="exp_month" maxlength="2" required="" />
 							/
-							<input type="text" size="4" class="form-control" data-stripe="exp-year" name="exp_year" maxlength="4" />
+							<input type="text" size="4" class="form-control numeric" data-stripe="exp-year" name="exp_year" id="exp_year" maxlength="4" required="" />
 						</div>
 					</div>
 
@@ -308,7 +306,7 @@ $(function() {
             }
 
         });
-
+        
         if (hasError) {
             return false;
         }
@@ -380,8 +378,59 @@ $(function() {
 		$('#covercctotal').val(totalAmount.toFixed(2));
 	}
 
-
 });
+
+function validate_cc_exp() {
+    value = parseInt($('#exp_month').val(), 10);
+    
+    var m_result = true;
+    var y_result = true;
+    
+    var year = $('#exp_year').val(),
+        currentMonth = new Date().getMonth() + 1,
+        currentYear  = new Date().getFullYear();
+        
+    if (value < 1 || value > 12) {
+        m_result = false;
+    }
+    
+    if(m_result){
+        year = parseInt(year, 10);
+        if (year > currentYear || (year == currentYear && value >= currentMonth)) {
+            m_result = true;
+        } else {    
+            m_result = false;
+        }
+    }
+    
+    value = parseInt($('#exp_year').val(), 10);
+    
+    var month = $('#exp_month').val(),
+        currentMonth = new Date().getMonth() + 1,
+        currentYear  = new Date().getFullYear();
+    if (value < currentYear || value > currentYear + 10) {
+        y_result = false;
+    }
+    
+    if(y_result){
+        month = parseInt(month, 10);
+        if (value > currentYear || (value == currentYear && month >= currentMonth)) {
+            y_result = true;
+        } else {
+            y_result = false;
+        }
+    }
+    
+    if(m_result==true && y_result==true){
+        $('#exp_month').removeClass('redifyHim');
+        $('#exp_year').removeClass('redifyHim');
+        return true;
+    }else{
+        $('#exp_month').addClass('redifyHim');
+        $('#exp_year').addClass('redifyHim');
+        return false;
+    }
+}
 </script>
 @stop
 @stop
