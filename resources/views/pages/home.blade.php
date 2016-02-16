@@ -237,8 +237,7 @@
 			</div>
 
 			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="submit" class="btn btn-primary">Donate</button>
+			<button type="submit" class="btn btn-primary donate-button">Donate</button>
 			</div>
 
 		</div>
@@ -376,6 +375,18 @@ $(function() {
 
 		$('#coverccfee').val(feeAmount.toFixed(2));
 		$('#covercctotal').val(totalAmount.toFixed(2));
+
+		var am = totalAmount;
+
+		if (val !== 'other') {
+			am = Number(val);
+		}
+
+		if (am >= 1000) {
+			am = (am / 1000) + 'K';
+		}
+
+		$('.donate-button').html('Donate $' + (am));
 	}
 
 
