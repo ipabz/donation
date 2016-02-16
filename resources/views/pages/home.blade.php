@@ -103,7 +103,7 @@
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-addon" for="coverccfee">$</div>
-										<input type="text" class="form-control" name="otheramount" id="otheramount" placeholder="" />
+										<input type="text" class="form-control numeric" name="otheramount" id="otheramount" placeholder="" />
 									</div>
 								</div>
 							</div>
@@ -131,13 +131,13 @@
 									<div class="form-group">
 										<div class="input-group">
 											<div class="input-group-addon" for="coverccfee">Fee Amount</div>
-											<input type="text" class="form-control" id="coverccfee" placeholder="Amount" value="000.00" disabled />
+											<input type="text" class="form-control" id="coverccfee" placeholder="Amount" value="0.00" disabled />
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="input-group">
 											<div class="input-group-addon" for="covercctotal">Total Donation</div>
-											<input type="text" class="form-control" id="covercctotal" placeholder="Amount" value="0000.00" disabled />
+											<input type="text" class="form-control" id="covercctotal" placeholder="Amount" value="0.00" disabled />
 										</div>
 									</div>
 
@@ -237,8 +237,7 @@
 			</div>
 
 			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="submit" class="btn btn-primary">Send</button>
+			<button type="submit" class="btn btn-primary donate-button">Donate</button>
 			</div>
 
 		</div>
@@ -349,14 +348,28 @@ $(function() {
 	});
 
 	$('#covercc').on('click', function() {
-		if ($(this).prop('checked')) {
-			$('#covercctext').removeClass('hidden');
-		}
-		else {
-			$('#covercctext').addClass('hidden');
+
+		var val = $('input:radio[name=amount]:checked').val();
+
+		if (val === 'other') {
+			val = $('#otheramount').val();
 		}
 
-		calculate();
+		if (val !== '' && typeof val !== 'undefined') {
+
+			if ($(this).prop('checked')) {
+				$('#covercctext').removeClass('hidden');
+			}
+			else {
+				$('#covercctext').addClass('hidden');
+			}
+
+			calculate();
+
+		} else {
+			alert("Please select an amount first!"); // this alert can be change later on
+			return false;
+		}
 	});
 
 	$('#otheramount').keyup(function() {
@@ -371,11 +384,27 @@ $(function() {
 			val = $('#otheramount').val();
 		}
 
-		var feeAmount = (Number(val) * 0.03) + 0.3;
-		var totalAmount = Number(val) + feeAmount;
+		if (val !== '' && typeof val !== 'undefined') {
 
-		$('#coverccfee').val(feeAmount.toFixed(2));
-		$('#covercctotal').val(totalAmount.toFixed(2));
+			var feeAmount = (Number(val) * 0.03) + 0.3;
+			var totalAmount = Number(val) + feeAmount;
+
+			$('#coverccfee').val(feeAmount.toFixed(2));
+			$('#covercctotal').val(totalAmount.toFixed(2));
+
+			var am = totalAmount;
+
+			if ($('#covercc').prop('checked')) {
+				am = am.toFixed(2);
+			}
+
+			if (am >= 1000) {
+				am = (am / 1000) + 'K';
+			}
+
+			$('.donate-button').html('Donate $' + (am));
+
+		}
 	}
 
 });

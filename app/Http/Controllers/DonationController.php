@@ -58,24 +58,45 @@ class DonationController extends Controller
 
 		foreach($recurring as $r) {
 
-			$donationData = [
-				'donor_id' => $r->donor_id,
-				'credit_card_id' => $r->credit_card_id,
-				'organization_id' => $r->organization_id,
-				'amount' => $r->amount,
-				'note' => $r->note,
-				'recur' => 1,
-				'frequency_id' => $r->frequency_id,
-				'cover_processing_fee' => $r->cover_processing_fee
+			$donor = Donor::find($r->donor_id);
+			$creditCard = CreditCard::find($r->credit_card_id);
+			$ccMonth = date("m", strtotime($creditCard->exp_date));
+			$ccYear = date("Y", strtotime($creditCard->exp_date));
+
+			$desc = "Donation From " . $donor->name;
+	        $coverFee = $r->cover_processing_fee === 'yes' ? true:false;
+
+			$metaData = [
+				'Organization' => 'Midamerica Prison Ministry',
+				'Donor Name' => $donor->name,
+				'Address' => $donor->address . ', ' . $donor->city . ', ' . $donor->state . ' ' . $donor->zipcode . ', ' . $donor->country
 			];
 
-			Donation::create( $donationData );
+			$c = charge($creditCard->card_number, $ccMonth, $ccYear, $amount, $desc, $coverFee, $metaData);
 
-			$date = new Carbon();
-			$r->repeat_date = $date->addMonths(1);
-			$r->save();
+			if ($c !== TRUE) {
+				// card contains error
+				// will do something here
+			} else {
 
-			// add charge here
+				$donationData = [
+					'donor_id' => $r->donor_id,
+					'credit_card_id' => $r->credit_card_id,
+					'organization_id' => $r->organization_id,
+					'amount' => $r->amount,
+					'note' => $r->note,
+					'recur' => 1,
+					'frequency_id' => $r->frequency_id,
+					'cover_processing_fee' => $r->cover_processing_fee
+				];
+
+				Donation::create( $donationData );
+
+				$date = new Carbon();
+				$r->repeat_date = $date->addMonths(1);
+				$r->save();
+
+			}
 		}
 
 	}
