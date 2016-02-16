@@ -15,6 +15,10 @@ Route::get('/', 'DonationController@index');
 
 Route::get('/charge', 'DonationController@chargeTest');
 
+Route::group(['prefix' => 'donation'], function() {
+    Route::post('/submit', ['as' => 'donation.submit', 'uses' => 'DonationController@postSubmitDonation']);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
