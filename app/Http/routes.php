@@ -13,7 +13,7 @@
 
 Route::get('/', 'DonationController@index');
 Route::get('/thankyou', 'DonationController@thankyou');
-
+Route::get('/recur', 'DonationController@recurringDonations');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
