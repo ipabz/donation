@@ -40,6 +40,12 @@ input:focus, textarea:focus, select:focus {box-shadow:0 0 0 0;outline:none;}
 		background: #0da7d4;
 	}
 
+	.btn:active,
+	.btn:focus {
+		box-shadow: none;
+		outline: 0!important;
+	}
+
 #donatenow {
 	padding: 60px 0;
 }
@@ -53,12 +59,12 @@ input:focus, textarea:focus, select:focus {box-shadow:0 0 0 0;outline:none;}
 
 	.donationheader {
 		text-align: center;
-		padding: 0 54px;
-		margin-bottom: 24px;
+		padding: 0 0;
+		margin-bottom: 12px;
 	}
-	.donationheader h1 {
+	.donationheader h2 {
 		padding: 0;
-		margin: 0;
+		margin: 20px 0 0 0;
 		font-weight: 700;
 	}
 
@@ -111,7 +117,7 @@ input:focus, textarea:focus, select:focus {box-shadow:0 0 0 0;outline:none;}
 		padding-right: 20px;
 		font-size: 16px;
 	}
-	#donationamount_otheramount {
+	#otheramount {
 		background: #014c6c;
 		color: #ffffff;
 		border: 0;
@@ -181,4 +187,40 @@ input:focus, textarea:focus, select:focus {box-shadow:0 0 0 0;outline:none;}
 		display: block;
 		width: 100%;
 		font-size: 20px;
+	}
+
+#donor {}
+
+	.modal-content {
+		border: 0;
+		box-shadow: none;
+	}
+
+	.modal-header {
+		border-bottom: 1px solid #eeeeee;
+	}
+	.modal-header h4 {
+		font-weight: 700;
+	}
+
+	.modal-body {}
+	.modal-body .form-group {
+		margin: 12px 0;
+	}
+	.modal-body .control-label {
+		line-height: 24px;
+		padding-top: 10px;
+		cursor: pointer;
+	}
+	.modal-body .form-control {
+		height: 44px;
+		border: 1px solid #eeeeee;
+		box-shadow: none;
+	}
+	.modal-body .form-control:focus {
+		border-color: #0da7d4;
+	}
+
+	.modal-footer {
+		border-top: 1px solid #eeeeee;
 	}
