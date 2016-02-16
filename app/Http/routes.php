@@ -13,8 +13,6 @@
 
 Route::get('/', 'DonationController@index');
 
-Route::get('/charge', 'DonationController@chargeTest');
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
