@@ -214,7 +214,7 @@
 					<div class="form-group">
 						<label for="donor_cardnum" class="col-sm-4 control-label">Card Number</label>
 						<div class="col-sm-8">
-							<input type="text" data-stripe="number" name="card_number" required="" class="form-control" id="donor_cardnum" placeholder="Card Number">
+							<input type="text" data-stripe="number" name="card_number" required="" class="form-control numeric" id="donor_cardnum" placeholder="Card Number">
 						</div>
 					</div>
 
