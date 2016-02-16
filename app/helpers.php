@@ -21,13 +21,20 @@ function charge($cardNumber, $expMonth, $expYear, $amount, $description, $coverP
 		'exp_year' => $expYear
 	];
 
-	$charge = \Stripe\Charge::create([
-		'card' => $card, 
-		'amount' => $amount, 
-		'currency' => $currency,
-		'description' => $description,
-		'metadata' => $metaData
-	]);
+	try {
+
+		$charge = \Stripe\Charge::create([
+			'card' => $card, 
+			'amount' => $amount, 
+			'currency' => $currency,
+			'description' => $description,
+			'metadata' => $metaData
+		]);
+
+	} catch(Exception $e) {
+		return $e->getMessage();
+	}
+
 
 	return $charge->paid;
 

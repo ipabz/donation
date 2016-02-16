@@ -13,10 +13,15 @@
 
 <form action="{{ route('donation.submit') }}" method="POST" id="payment-form">
 <input type="hidden" name="organization_id" value="1" />
+{!! csrf_field() !!}
 <section id="donatenow">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
+
+				@if($message)
+				<div class="alert alert-danger" role="alert">{{ $message }}</div>
+				@endif
 
 				<div class="row donationheader">
 					<img src="{{ asset('assets/images/logo.png')}}" alt="" />
@@ -144,7 +149,7 @@
 
 					<div class="row donationsubmit">
 						<div class="col-xs-12">
-							<input type="button" name="name" class="btn btn-lg btn-primary" value="Donate" data-toggle="modal" data-target="#donor"/>
+							<input type="button" name="name" class="btn btn-lg btn-primary btn-donate" value="Donate" data-toggle="modal" data-target=""/>
 						</div>
 					</div>
 			</div>
@@ -155,6 +160,7 @@
 
 <!-- Modal -->
 
+<<<<<<< HEAD
 <div class="modal fade" id="donor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -173,42 +179,42 @@
 					<div class="form-group">
 						<label for="donor_email" class="col-sm-4 control-label">Email</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="donor_email" placeholder="Email">
+							<input type="text" name="email" required="" class="form-control" id="donor_email" placeholder="Email" >
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="donor_name" class="col-sm-4 control-label">Name</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="donor_name" placeholder="Full Name">
+							<input type="text" name="name" required="" class="form-control" id="donor_name" placeholder="Full Name">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="donor_address" class="col-sm-4 control-label">Address</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="donor_address" placeholder="Address">
+							<input type="text" name="address" required="" class="form-control" id="donor_address" placeholder="Address">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="donor_postcode" class="col-sm-4 control-label">Post Code</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="donor_postcode" placeholder="Post Code">
+							<input type="text" name="zipcode" required="" class="form-control numeric" id="donor_postcode" placeholder="Post Code">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="donor_city" class="col-sm-4 control-label">City</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="donor_city" placeholder="City">
+							<input type="text" name="city" required="" class="form-control" id="donor_city" placeholder="City">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="donor_cardnum" class="col-sm-4 control-label">Card Number</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="donor_cardnum" placeholder="Card Number">
+							<input type="text" data-stripe="number" name="card_number" required="" class="form-control" id="donor_cardnum" placeholder="Card Number">
 						</div>
 					</div>
 
@@ -239,6 +245,83 @@
 
 		</div>
 	</div>
+=======
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Donate to Midamerica Prison Ministry</h4>
+      </div>
+      <div class="modal-body">
+ 
+		  <span class="payment-errors"></span>
+
+		  <div class="form-row">
+		    <label>
+		      <span class="temp">Email</span>
+		      <input type="text" size="20" name="email" required="" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span class="temp">Name</span>
+		      <input type="text" size="20" name="name" required="" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span class="temp">Address</span>
+		      <input type="text" size="20" name="address" required="" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span class="temp">Post Code</span>
+		      <input type="text" size="20" class="numeric" name="zipcode" required="" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span class="temp">City</span>
+		      <input type="text" size="20" name="city" required="" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span class="temp">Card Number</span>
+		      <input type="text" size="20" data-stripe="number" name="card_number" required="" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span class="temp">CVC</span>
+		      <input type="text" size="4" data-stripe="cvc" name="cvv" required="" class="numeric" />
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span class="temp">Expiration (MM/YYYY)</span>
+		      <input type="text" size="2" data-stripe="exp-month" name="exp_month" maxlength="2" required="" class="numeric" />
+		    </label>
+		    <span> / </span>
+		    <input type="text" size="4" data-stripe="exp-year" name="exp_year" maxlength="4" required="" class="numeric" />
+		  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary btn-send">Send</button>
+      </div>
+    </div>
+  </div>
+>>>>>>> master
 </div>
 </form>
 
@@ -257,9 +340,57 @@ function changedFund() {
 }
 $(function() {
 
+	$('.numeric').numeric();
+
 	$(document).find('.temp').css({
 		width: '100px',
 		display: 'inline-block'
+	});
+
+	$('.btn-donate').on('click', function(e) {
+		if($('input:radio[name=amount]:checked').length > 0) {
+			$(this).attr('data-target', '#myModal');
+		}
+		else {
+			$(this).attr('data-target','');
+		}
+
+		var val = $('input:radio[name=amount]:checked').val();
+
+		if (val === 'other') {
+
+			if($('#otheramount').val() <= 0 || $('#otheramount').val() == '') {
+				$(this).attr('data-target','');
+				$('#otheramount').addClass('redifyHim'); // ^______________^
+			}
+			else {
+				$(this).attr('data-target', '#myModal');
+			}
+		}
+
+	});
+
+	$('.btn-send').on('click', function(e) {
+		e.preventDefault();
+		var hasError = false;
+
+        $('#payment-form [required]').each(function() {
+
+            if ($.trim($(this).val()) === '') {
+                $(this).addClass('redifyHim');
+                hasError = true;
+            } else {
+                $(this).removeClass('redifyHim');
+            }
+
+        });
+
+        if (hasError) {
+            return false;
+        }
+        else {
+        	$('form').submit();
+        }
 	});
 
 	$('.donationpad label').on('click', function(e) {
