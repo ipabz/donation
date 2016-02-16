@@ -24,7 +24,8 @@
 				@endif
 
 				<div class="row donationheader">
-					<h1>Donate to Midamerica Prison Ministry</h1>
+					<img src="{{ asset('assets/images/logo.png')}}" alt="" />
+					<h2>Donate to Midamerica Prison Ministry</h2>
 				</div>
 
 					<div class="row donationfund">
@@ -156,9 +157,95 @@
 	</div>
 </section>
 
- 
+
 <!-- Modal -->
 
+<<<<<<< HEAD
+<div class="modal fade" id="donor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Donate to Midamerica Prison Ministry</h4>
+			</div>
+
+			<div class="modal-body">
+
+				<div class="form-horizontal">
+
+					<span class="payment-errors"></span>
+
+					<div class="form-group">
+						<label for="donor_email" class="col-sm-4 control-label">Email</label>
+						<div class="col-sm-8">
+							<input type="text" name="email" required="" class="form-control" id="donor_email" placeholder="Email" >
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="donor_name" class="col-sm-4 control-label">Name</label>
+						<div class="col-sm-8">
+							<input type="text" name="name" required="" class="form-control" id="donor_name" placeholder="Full Name">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="donor_address" class="col-sm-4 control-label">Address</label>
+						<div class="col-sm-8">
+							<input type="text" name="address" required="" class="form-control" id="donor_address" placeholder="Address">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="donor_postcode" class="col-sm-4 control-label">Post Code</label>
+						<div class="col-sm-8">
+							<input type="text" name="zipcode" required="" class="form-control numeric" id="donor_postcode" placeholder="Post Code">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="donor_city" class="col-sm-4 control-label">City</label>
+						<div class="col-sm-8">
+							<input type="text" name="city" required="" class="form-control" id="donor_city" placeholder="City">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="donor_cardnum" class="col-sm-4 control-label">Card Number</label>
+						<div class="col-sm-8">
+							<input type="text" data-stripe="number" name="card_number" required="" class="form-control" id="donor_cardnum" placeholder="Card Number">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="donor_cvc" class="col-sm-4 control-label">CVC</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="donor_cvc" size="4" data-stripe="cvc" name="cvv">
+						</div>
+					</div>
+
+					<div class="form-group form-inline">
+						<label for="donor_cvc" class="col-sm-4 control-label">Expiration (MM/YYYY)</label>
+						<div class="col-sm-8">
+							<input type="text" size="2" class="form-control" data-stripe="exp-month" name="exp_month" maxlength="2" />
+							/
+							<input type="text" size="4" class="form-control" data-stripe="exp-year" name="exp_year" maxlength="4" />
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="submit" class="btn btn-primary">Send</button>
+			</div>
+
+		</div>
+	</div>
+=======
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -234,6 +321,7 @@
       </div>
     </div>
   </div>
+>>>>>>> master
 </div>
 </form>
 
@@ -357,9 +445,9 @@ $(function() {
 	{
 		var val = $('input:radio[name=amount]:checked').val();
 
-		if (val === 'other') {			
+		if (val === 'other') {
 			val = $('#otheramount').val();
-		} 
+		}
 
 		var feeAmount = (Number(val) * 0.03) + 0.3;
 		var totalAmount = Number(val) + feeAmount;
@@ -367,7 +455,7 @@ $(function() {
 		$('#coverccfee').val(feeAmount.toFixed(2));
 		$('#covercctotal').val(totalAmount.toFixed(2));
 	}
- 
+
 
 });
 </script>
