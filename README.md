@@ -20,4 +20,4 @@ and add this
 
         * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
         
-dont forget to change /path/to/artisan
+don't forget to change /path/to/artisan
