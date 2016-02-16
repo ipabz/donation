@@ -32,4 +32,17 @@ class DonationController extends Controller
 	}
 
 
+	public function chargeTest()
+	{
+		$desc = "Donation From Ivan";
+		$metaData = [
+			'Organization' => 'Midamerica Prison MInistry',
+			'Donor Name' => 'Ivan Clint A. Pabelona',
+			'Address' => 'Tampi, San Jose, 6202, Negros Oriental, Philippines'
+		];
+
+		var_dump(charge('4242424242424242', 5, 2017, 50, $desc, false, $metaData));
+	}
+
+
 }
