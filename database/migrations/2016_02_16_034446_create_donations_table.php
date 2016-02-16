@@ -21,6 +21,7 @@ class CreateDonationsTable extends Migration
             $table->text('note')->nullable();
             $table->integer('recur')->default(0);
             $table->integer('frequency_id')->nullable();
+            $table->string('cover_processing_fee')->default('no');
             $table->timestamps();
         });
     }
