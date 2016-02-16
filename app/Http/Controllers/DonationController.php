@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-
-use App\Frequency;
-use App\Donation;
-use DB;
 
 use App\Donor;
 use App\Donation;
@@ -19,6 +14,8 @@ use App\Organization;
 use App\CreditCard;
 
 use Carbon\Carbon;
+
+use DB;
 
 class DonationController extends Controller
 {
@@ -96,7 +93,6 @@ class DonationController extends Controller
 		var_dump(charge('4242424242424242', 5, 2017, 50, $desc, false, $metaData));
 	}
 
-<<<<<<< HEAD
 	public function checkIfDonatorExist($email)
     {
         $result = Donor::where('email','=',$email)->count();
@@ -178,17 +174,13 @@ class DonationController extends Controller
         	'cover_processing_fee' => $this->request->has('donationaddinfo_covercc')?'yes':'no'
         ]);
 
-        return redirect()->back();
+        return redirect()->route('donation.thankyou');
 
 	}
 
-
-
-=======
 	public function thankyou()
 	{
 	   $vars = [];
        return view('pages.thankyou', $vars);
 	}
->>>>>>> master
 }
