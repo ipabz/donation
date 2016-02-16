@@ -238,7 +238,7 @@
 
 			<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="submit" class="btn btn-primary">Send</button>
+			<button type="submit" class="btn btn-primary">Donate</button>
 			</div>
 
 		</div>
