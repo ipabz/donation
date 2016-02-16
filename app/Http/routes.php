@@ -12,10 +12,6 @@
 */
 
 
-
-Route::get('/charge', 'DonationController@chargeTest');
-Route::get('/recur', 'DonationController@recurringDonations');
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
