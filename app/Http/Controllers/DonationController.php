@@ -69,5 +69,9 @@ class DonationController extends Controller
 		var_dump(charge('4242424242424242', 5, 2017, 50, $desc, false, $metaData));
 	}
 
-
+	public function thankyou()
+	{
+	   $vars = [];
+       return view('pages.thankyou', $vars);
+	}
 }

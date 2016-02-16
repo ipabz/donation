@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'DonationController@index');
+Route::get('/thankyou', 'DonationController@thankyou');
 
 /*
 |--------------------------------------------------------------------------
