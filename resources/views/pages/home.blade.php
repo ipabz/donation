@@ -396,6 +396,8 @@ $(function() {
 
 			if ($('#covercc').prop('checked')) {
 				am = am.toFixed(2);
+			} else {
+				am = Number(val);
 			}
 
 			if (am >= 1000) {
