@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Organization;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserTableSeeder::class);
+        $this->call(OrganizationTableSeeder::class);
     }
+}
+
+class OrganizationTableSeeder extends Seeder 
+{
+	public function run() 
+	{
+		DB::table('organizations')->truncate();
+
+		$organization = [
+			'name' => 'Midamerica Prison Ministry',
+			'email' => '',
+			'description' => '',
+			'address' => '',
+			'city' => '',
+			'state' => '',
+			'zipcode' => ''
+		];
+
+		Organization::create($organization);
+	}
 }
