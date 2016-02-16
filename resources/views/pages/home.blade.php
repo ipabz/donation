@@ -103,7 +103,7 @@
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-addon" for="coverccfee">$</div>
-										<input type="text" class="form-control" name="otheramount" id="otheramount" placeholder="" />
+										<input type="text" class="form-control numeric" name="otheramount" id="otheramount" placeholder="" />
 									</div>
 								</div>
 							</div>
