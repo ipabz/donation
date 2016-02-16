@@ -245,83 +245,7 @@
 
 		</div>
 	</div>
-=======
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Donate to Midamerica Prison Ministry</h4>
-      </div>
-      <div class="modal-body">
- 
-		  <span class="payment-errors"></span>
 
-		  <div class="form-row">
-		    <label>
-		      <span class="temp">Email</span>
-		      <input type="text" size="20" name="email" required="" />
-		    </label>
-		  </div>
-
-		  <div class="form-row">
-		    <label>
-		      <span class="temp">Name</span>
-		      <input type="text" size="20" name="name" required="" />
-		    </label>
-		  </div>
-
-		  <div class="form-row">
-		    <label>
-		      <span class="temp">Address</span>
-		      <input type="text" size="20" name="address" required="" />
-		    </label>
-		  </div>
-
-		  <div class="form-row">
-		    <label>
-		      <span class="temp">Post Code</span>
-		      <input type="text" size="20" class="numeric" name="zipcode" required="" />
-		    </label>
-		  </div>
-
-		  <div class="form-row">
-		    <label>
-		      <span class="temp">City</span>
-		      <input type="text" size="20" name="city" required="" />
-		    </label>
-		  </div>
-
-		  <div class="form-row">
-		    <label>
-		      <span class="temp">Card Number</span>
-		      <input type="text" size="20" data-stripe="number" name="card_number" required="" />
-		    </label>
-		  </div>
-
-		  <div class="form-row">
-		    <label>
-		      <span class="temp">CVC</span>
-		      <input type="text" size="4" data-stripe="cvc" name="cvv" required="" class="numeric" />
-		    </label>
-		  </div>
-
-		  <div class="form-row">
-		    <label>
-		      <span class="temp">Expiration (MM/YYYY)</span>
-		      <input type="text" size="2" data-stripe="exp-month" name="exp_month" maxlength="2" required="" class="numeric" />
-		    </label>
-		    <span> / </span>
-		    <input type="text" size="4" data-stripe="exp-year" name="exp_year" maxlength="4" required="" class="numeric" />
-		  </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary btn-send">Send</button>
-      </div>
-    </div>
-  </div>
->>>>>>> master
 </div>
 </form>
 
@@ -349,7 +273,7 @@ $(function() {
 
 	$('.btn-donate').on('click', function(e) {
 		if($('input:radio[name=amount]:checked').length > 0) {
-			$(this).attr('data-target', '#myModal');
+			$(this).attr('data-target', '#donor');
 		}
 		else {
 			$(this).attr('data-target','');
@@ -364,7 +288,7 @@ $(function() {
 				$('#otheramount').addClass('redifyHim'); // ^______________^
 			}
 			else {
-				$(this).attr('data-target', '#myModal');
+				$(this).attr('data-target', '#donor');
 			}
 		}
 
