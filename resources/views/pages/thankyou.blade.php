@@ -16,7 +16,8 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 text-left">
                 <div class="row donationheader">
-					<h1>Midamerica Prison Ministry</h1>
+                    <img src="{{ asset('assets/images/logo.png')}}" alt="" />
+					<h2>Midamerica Prison Ministry</h2>
 				</div>
                 
                 <br />
