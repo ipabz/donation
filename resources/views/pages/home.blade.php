@@ -148,7 +148,7 @@
 
 					<div class="row donationsubmit">
 						<div class="col-xs-12">
-							<input type="button" name="name" class="btn btn-lg btn-primary" value="Donate" data-toggle="modal" data-target="#myModal"/>
+							<input type="button" name="name" class="btn btn-lg btn-primary btn-donate" value="Donate" data-toggle="modal" data-target=""/>
 						</div>
 					</div>
 			</div>
@@ -173,64 +173,64 @@
 		  <div class="form-row">
 		    <label>
 		      <span class="temp">Email</span>
-		      <input type="text" size="20" name="email" />
+		      <input type="text" size="20" name="email" required="" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span class="temp">Name</span>
-		      <input type="text" size="20" name="name" />
+		      <input type="text" size="20" name="name" required="" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span class="temp">Address</span>
-		      <input type="text" size="20" name="address" />
+		      <input type="text" size="20" name="address" required="" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span class="temp">Post Code</span>
-		      <input type="text" size="20" name="zipcode" />
+		      <input type="text" size="20" class="numeric" name="zipcode" required="" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span class="temp">City</span>
-		      <input type="text" size="20" name="city" />
+		      <input type="text" size="20" name="city" required="" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span class="temp">Card Number</span>
-		      <input type="text" size="20" data-stripe="number" name="card_number" />
+		      <input type="text" size="20" data-stripe="number" name="card_number" required="" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span class="temp">CVC</span>
-		      <input type="text" size="4" data-stripe="cvc" name="cvv" />
+		      <input type="text" size="4" data-stripe="cvc" name="cvv" required="" class="numeric" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span class="temp">Expiration (MM/YYYY)</span>
-		      <input type="text" size="2" data-stripe="exp-month" name="exp_month" maxlength="2" />
+		      <input type="text" size="2" data-stripe="exp-month" name="exp_month" maxlength="2" required="" class="numeric" />
 		    </label>
 		    <span> / </span>
-		    <input type="text" size="4" data-stripe="exp-year" name="exp_year" maxlength="4" />
+		    <input type="text" size="4" data-stripe="exp-year" name="exp_year" maxlength="4" required="" class="numeric" />
 		  </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-primary btn-send">Send</button>
       </div>
     </div>
   </div>
@@ -252,9 +252,57 @@ function changedFund() {
 }
 $(function() {
 
+	$('.numeric').numeric();
+
 	$(document).find('.temp').css({
 		width: '100px',
 		display: 'inline-block'
+	});
+
+	$('.btn-donate').on('click', function(e) {
+		if($('input:radio[name=amount]:checked').length > 0) {
+			$(this).attr('data-target', '#myModal');
+		}
+		else {
+			$(this).attr('data-target','');
+		}
+
+		var val = $('input:radio[name=amount]:checked').val();
+
+		if (val === 'other') {
+
+			if($('#otheramount').val() <= 0 || $('#otheramount').val() == '') {
+				$(this).attr('data-target','');
+				$('#otheramount').addClass('redifyHim'); // ^______________^
+			}
+			else {
+				$(this).attr('data-target', '#myModal');
+			}
+		}
+
+	});
+
+	$('.btn-send').on('click', function(e) {
+		e.preventDefault();
+		var hasError = false;
+
+        $('#payment-form [required]').each(function() {
+
+            if ($.trim($(this).val()) === '') {
+                $(this).addClass('redifyHim');
+                hasError = true;
+            } else {
+                $(this).removeClass('redifyHim');
+            }
+
+        });
+
+        if (hasError) {
+            return false;
+        }
+        else {
+        	$('form').submit();
+        }
 	});
 
 	$('.donationpad label').on('click', function(e) {
