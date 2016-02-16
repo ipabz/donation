@@ -167,59 +167,59 @@
 		  <div class="form-row">
 		    <label>
 		      <span>Email</span>
-		      <input type="text" size="20" />
+		      <input type="text" size="20" name="email" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>Name</span>
-		      <input type="text" size="20" />
+		      <input type="text" size="20" name="complete_name" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>Address</span>
-		      <input type="text" size="20" />
+		      <input type="text" size="20" name="address" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>Post Code</span>
-		      <input type="text" size="20" />
+		      <input type="text" size="20" name="zip_code" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>City</span>
-		      <input type="text" size="20" />
+		      <input type="text" size="20" name="city" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>Card Number</span>
-		      <input type="text" size="20" data-stripe="number"/>
+		      <input type="text" size="20" data-stripe="number" name="card_number" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>CVC</span>
-		      <input type="text" size="4" data-stripe="cvc"/>
+		      <input type="text" size="4" data-stripe="cvc" name="cvc" />
 		    </label>
 		  </div>
 
 		  <div class="form-row">
 		    <label>
 		      <span>Expiration (MM/YYYY)</span>
-		      <input type="text" size="2" data-stripe="exp-month"/>
+		      <input type="text" size="2" data-stripe="exp-month" name="exp_month" />
 		    </label>
 		    <span> / </span>
-		    <input type="text" size="4" data-stripe="exp-year"/>
+		    <input type="text" size="4" data-stripe="exp-year" name="exp_year" />
 		  </div>
 
 		</form>
